@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test</title>
+  </head>
+  <body>
+    <h1>Hi</h1>
+    <input type="text" id="text" />
+    <script>
+      document.querySelector("#text").addEventListener("keydown", (e) => {
+        if (e.keyCode == "13") {
+          fetch("http://localhost:3000/send", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              value: document.querySelector("#text").value,
+            }),
+          })
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+      });
+    </script>
+  </body>
+</html>
